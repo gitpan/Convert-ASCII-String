@@ -1,4 +1,4 @@
-# $Id: String.pm,v 0.30 2004/01/18 14:06:09 sts Exp $
+# $Id: String.pm,v 0.31 2004/01/23 22:25:31 sts Exp $
 
 package Convert::ASCII::String;
 
@@ -7,41 +7,41 @@ use base qw(Exporter);
 use strict 'vars';
 use warnings;
 
-our $VERSION = '0.30';
+our $VERSION = '0.31';
 
-our @EXPORT_OK = qw(string2ascii ascii2string);
+our @EXPORT_OK = qw(str2asc asc2str);
 
 our $Sep;
 
-sub SUCCESS { 1 }
-sub ARGS_MISMATCH { -1 }
-sub SEP_MISMATCH { -2 }
+sub croak {
+    require Carp;
+    &Carp::croak;
+}
 
 =head1 NAME
 
-Convert::ASCII::String - convert character strings to ASCII and vice versa.
+Convert::ASCII::String - convert character strings to ASCII.
 
 =head1 SYNOPSIS
 
- use Convert::ASCII::String qw(string2ascii ascii2string);
+ use Convert::ASCII::String qw(str2asc asc2str);
 
- $transform = 'Premature optimization is the root of all evil.';
+ $transform = 'Qui vult dare parva non debet magna rogare.';
 
- string2ascii(\$transform, '.');
+ str2asc($transform, '.');
 
-   80.114.101.109.97.116.117.114.101.32.
-   111.112.116.105.109.105.122.97.116.105.
-   111.110.32.105.115.32.116.104.101.32.114.
-   111.111.116.32.111.102.32.97.108.108.32.
-   101.118.105.108.46
+   81.117.105.32.118.117.108.116.32.100.
+   97.114.101.32.112.97.114.118.97.32.110.
+   111.110.32.100.101.98.101.116.32.109.97.
+   103.110.97.32.114.111.103.97.114.101.46
 
- ascii2string(\$transform, '.');
+ asc2str($transform, '.');
 
-   Premature optimization is the root of all evil.
+   Qui vult dare parva non debet magna rogare.
 
 =head1 DESCRIPTION
 
-C<Convert::ASCII::String> basically converts strings to ASCII and vice versa.
+C<Convert::ASCII::String> basically converts strings to ASCII.
 It applies the internal functions C<pack> & C<unpack>. Most time these functions prove 
 to be sufficient if data has to be converted and remains within memory.
 
@@ -65,88 +65,50 @@ has be transformed. So, when to use then?
 Whenever data has to be converted to ASCII and has to be stored on a disk or other mediums
 where it will freed from the array it was previously kept in. C<pack> & C<unpack> will not be
 able to convert an array to character if not each single ASCII code takes up its own index within
-the array. Thus string transformation with an item separator.
+the array; thus string transformation with an item separator.
 
 =head1 FUNCTIONS
 
-=head2 string2ascii
+=head2 str2asc
 
 Converts a character string to ASCII inserting a separator between each ASCII code.
 
 The separator is optional.
 
- string2ascii(\$data, '.');
+ str2asc($str, '.');
 
  or
 
- string2ascii(\$data);
+ str2asc($str);
 
 Beware, second option will not allow back converting from ASCII.
 
-B<RETURN CODES>
-
-=over 4
-
-=item (1)
-
-Success.
-
-=item (-1)
-
-No scalar reference provided.
-
-=back
-
 =cut
 
-sub string2ascii {
-    my ($data, $sep) = @_;
-    $sep ||= $Sep || '';
-    return ARGS_MISMATCH unless ref $data eq 'SCALAR';
+sub str2asc {
+    my $str = shift;
+    my $sep = shift || $Sep || '';
+    croak q~Usage: str2asc($str)~ unless $str;
 
-    my @ascii = unpack 'C*', $$data;
-    $$data = join $sep, @ascii;
-
-    return SUCCESS;
+    return join $sep, unpack 'C*', $str;
 }
 
-=head2 ascii2string
+=head2 asc2str
 
 And vice versa.
 
- ascii2string(\$data, '.');
-
-B<RETURN CODES>
-
-=over 4
-
-=item (1)
-
-Success.
-
-=item (-1)
-
-No scalar reference or separator provided.
-
-=item (-2)
-
-Separator mismatch.
-
-=back
+ asc2str($asc, '.');
 
 =cut
 
-sub ascii2string {
-    my ($data, $sep) = @_;
-    $sep ||= $Sep;
-    return ARGS_MISMATCH unless ref $data eq 'SCALAR' && $sep;
-    $sep = quotemeta $sep;
-    return SEP_MISMATCH if $$data !~ /$sep/i;
-
-    my @ascii = split $sep, $$data;
-    $$data = pack 'C*', @ascii;
-
-    return SUCCESS;
+sub asc2str {
+    my $asc = shift;
+    my $sep = shift || $Sep; 
+    croak q~Usage: asc2str($asc, $sep)~ unless $asc && $sep;
+    
+    croak q~Separator mismatch~ unless $asc =~ /\Q$sep/i;
+    
+    return pack 'C*', split /\Q$sep/, $asc;
 }
 
 1;
@@ -162,6 +124,6 @@ Function delivery becomes then superfluous.
 
 =head1 EXPORT
 
-C<string2ascii(), ascii2string()> are exportable.
+C<str2asc(), asc2str()> are exportable.
 
 =cut

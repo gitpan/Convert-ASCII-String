@@ -1,5 +1,8 @@
 Revision history for Perl extension Convert::ASCII::String.
 
+0.31 2004/01/23
+ - refactored code.
+
 0.21 2004/01/06
  - documentation enhanced.
 

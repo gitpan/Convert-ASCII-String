@@ -3,9 +3,9 @@
 use strict;
 use warnings;
 
-use Test::More tests => 5;
+use Test::More tests => 4;
 
-use Convert::ASCII::String qw(string2ascii ascii2string);
+use Convert::ASCII::String qw(str2asc asc2str);
 
 BEGIN {
     my $PACKAGE = 'Convert::ASCII::String';
@@ -13,13 +13,5 @@ BEGIN {
     require_ok($PACKAGE);
 }
 
-my $perl = 'perl';
-string2ascii(\$perl);
-is($perl, 112101114108, 'string2ascii(\$data);');
-
-$perl = 'perl';
-string2ascii(\$perl, '.');
-is($perl, '112.101.114.108', 'string2ascii(\$data, $separator);');
-
-ascii2string(\$perl, '.');
-is($perl, 'perl', 'ascii2string(\$data, $separator);');
+is(str2asc('perl', '.'), '112.101.114.108', 'str2asc($string, [$sep]);');
+is(asc2str('112.101.114.108', '.'), 'perl', 'asc2str($string, $sep);');

@@ -3,35 +3,14 @@
 use strict;
 use warnings;
 
-use Convert::ASCII::String qw(string2ascii ascii2string);
+use Convert::ASCII::String qw(str2asc asc2str);
 
-no warnings;
 #$Convert::ASCII::String::Sep = '.';
-use warnings;
 
-my ($transform, $return);
+my $transform = 'Qui vult dare parva non debet magna rogare.';
 
-$transform = 'Premature optimization is the root of all evil.';
+$transform = str2asc($transform, '.');
+print "$transform\n";
 
-$return = string2ascii(\$transform, '.');
-
-if ($return == 1) {
-    print "$transform\n";
-}
-elsif ($return == -1) {
-   print "No scalar reference provided.\n";
-}
-
-<STDIN>;
-
-$return = ascii2string(\$transform, '.');
-
-if ($return == 1) {
-    print "$transform\n";
-}
-elsif ($return == -1) {
-    print "No scalar reference or separator provided.\n";
-}
-elsif ($return == -2) {
-    print "Separator mismatch.\n";
-}
+$transform = asc2str($transform, '.');
+print "\n$transform\n";
