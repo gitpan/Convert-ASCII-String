@@ -3,12 +3,20 @@ use Convert::ASCII::String q/:all/;
 use strict;
 use warnings;
 
-#$Convert::ASCII::String::Sep = '.';  
+#$Convert::ASCII::String::Sep = '.';
 
 our $wisdom = 'Premature optimization is the root of all evil.';
 
-string2ascii (\$wisdom, '.');
-print "$wisdom\n";
+my $ret = string2ascii(\$wisdom, '.');
+print <<"EOT";
+return: $ret
+$wisdom
+EOT
+
 <STDIN>;
-ascii2string (\$wisdom, '.');
-print "$wisdom\n";
+
+$ret = ascii2string(\$wisdom, '.');
+print <<"EOT";
+return: $ret
+$wisdom
+EOT
