@@ -1,17 +1,17 @@
-# $Id: String.pm,v 0.29 2004/01/06 17:27:52 sts Exp $
+# $Id: String.pm,v 0.30 2004/01/18 14:06:09 sts Exp $
 
 package Convert::ASCII::String;
 
 use 5.006;
-use base(Exporter);
+use base qw(Exporter);
 use strict 'vars';
 use warnings;
 
-our $VERSION = '0.29';
+our $VERSION = '0.30';
 
 our @EXPORT_OK = qw(string2ascii ascii2string);
-our %EXPORT_TAGS = (  all  =>    [ @EXPORT_OK ]
-);
+
+our $Sep;
 
 sub SUCCESS { 1 }
 sub ARGS_MISMATCH { -1 }
@@ -23,11 +23,11 @@ Convert::ASCII::String - convert character strings to ASCII and vice versa.
 
 =head1 SYNOPSIS
 
- use Convert::ASCII::String q/:all/;
+ use Convert::ASCII::String qw(string2ascii ascii2string);
 
  $transform = 'Premature optimization is the root of all evil.';
 
- string2ascii (\$transform, '.');
+ string2ascii(\$transform, '.');
 
    80.114.101.109.97.116.117.114.101.32.
    111.112.116.105.109.105.122.97.116.105.
@@ -35,15 +35,15 @@ Convert::ASCII::String - convert character strings to ASCII and vice versa.
    111.111.116.32.111.102.32.97.108.108.32.
    101.118.105.108.46
 
- ascii2string (\$transform, '.');
+ ascii2string(\$transform, '.');
 
    Premature optimization is the root of all evil.
 
 =head1 DESCRIPTION
 
 C<Convert::ASCII::String> basically converts strings to ASCII and vice versa.
-It uses perl's built-in functions C<pack> & C<unpack>. Most time these functions
-prove to be sufficient if data has to be converted and remains within memory.
+It applies the internal functions C<pack> & C<unpack>. Most time these functions prove 
+to be sufficient if data has to be converted and remains within memory.
 
 C<Pack> & C<unpack> rely upon arrays to convert data and not without reason though.
 Preserving multiple ASCII codes in a single string conveys some difficulty since
@@ -58,7 +58,7 @@ In most cases the usage of this module will prove to be inappropriate. If data w
 remain within memory, then array ASCII conversion using C<pack> & C<unpack> is appropriate and
 presumably faster than using C<Convert::ASCII::String>.
 
-C<Convert::ASCII::String> uses C<join> & C<split> to merge array to strings and vice versa. 
+C<Convert::ASCII::String> relies upon C<join> & C<split> to merge array to strings and vice versa. 
 Thus wise usage is recommended since such operations may slow down converting if much data
 has be transformed. So, when to use then?
 
@@ -75,11 +75,11 @@ Converts a character string to ASCII inserting a separator between each ASCII co
 
 The separator is optional.
 
- string2ascii (\$data, '.');
+ string2ascii(\$data, '.');
 
  or
 
- string2ascii (\$data);
+ string2ascii(\$data);
 
 Beware, second option will not allow back converting from ASCII.
 
@@ -101,7 +101,7 @@ No scalar reference provided.
 
 sub string2ascii {
     my ($data, $sep) = @_;
-    $sep ||= ${__PACKAGE__.'::Sep'} || '';
+    $sep ||= $Sep || '';
     return ARGS_MISMATCH unless ref $data eq 'SCALAR';
 
     my @ascii = unpack 'C*', $$data;
@@ -114,7 +114,7 @@ sub string2ascii {
 
 And vice versa.
 
- ascii2string (\$data, '.');
+ ascii2string(\$data, '.');
 
 B<RETURN CODES>
 
@@ -138,7 +138,7 @@ Separator mismatch.
 
 sub ascii2string {
     my ($data, $sep) = @_;
-    $sep ||= ${__PACKAGE__.'::Sep'};
+    $sep ||= $Sep;
     return ARGS_MISMATCH unless ref $data eq 'SCALAR' && $sep;
     $sep = quotemeta $sep;
     return SEP_MISMATCH if $$data !~ /$sep/i;
@@ -162,23 +162,6 @@ Function delivery becomes then superfluous.
 
 =head1 EXPORT
 
-C<string2ascii(), ascii2string()> upon request.
-
-B<TAGS>
-
-C<:all - *()>
-
-=head1 SEE ALSO
-
-perl(1)
-
-=head1 LICENSE
-
-This program is free software; 
-you may redistribute it and/or modify it under the same terms as Perl itself.
-
-=head1 AUTHOR
-
-Steven Schubiger
+C<string2ascii(), ascii2string()> are exportable.
 
 =cut

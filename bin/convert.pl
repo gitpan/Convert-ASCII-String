@@ -3,13 +3,13 @@
 use strict;
 use warnings;
 
-use Convert::ASCII::String q/:all/;
-
-my ($transform, $return);
+use Convert::ASCII::String qw(string2ascii ascii2string);
 
 no warnings;
 #$Convert::ASCII::String::Sep = '.';
 use warnings;
+
+my ($transform, $return);
 
 $transform = 'Premature optimization is the root of all evil.';
 
