@@ -16,7 +16,6 @@ Revision history for Perl extension Convert::ASCII::String.
    as global var.
 
 0.02 2004/01/01
- - testfile tests pack & unpack.
  - documentation corrections.
 
 0.01 2004/01/01

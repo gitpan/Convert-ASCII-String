@@ -11,6 +11,13 @@ To install this module type the following:
    make
    make test
    make install
+   
+SCRIPTS
+
+bin/convert.pl
+
+Interface to Convert::ASCII::String that contains predefined options
+and evaluates return codes.
 
 LICENSE
 

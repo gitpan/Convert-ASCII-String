@@ -3,20 +3,33 @@ use Convert::ASCII::String q/:all/;
 use strict;
 use warnings;
 
-#$Convert::ASCII::String::sep = '.';
+my $return;
 
 our $wisdom = 'Premature optimization is the root of all evil.';
 
-my $return = string2ascii(\$wisdom, '.');
-print <<"EOT";
-return: $return
-$wisdom
-EOT
+#$Convert::ASCII::String::sep = '.';
+
+# string to ascii
+$return = string2ascii(\$wisdom, '.');
+
+if ($return == 1) {
+    print "$wisdom\n";
+}
+elsif ($return == -1) {
+   print "No scalar reference provided.\n";
+}
 
 <STDIN>;
 
+# vice versa
 $return = ascii2string(\$wisdom, '.');
-print <<"EOT";
-return: $return
-$wisdom
-EOT
+
+if ($return == 1) {
+    print "$wisdom\n";
+}
+elsif ($return == -1) {
+    print "No scalar reference or separator provided.\n";
+}
+elsif ($return == -2) {
+    print "Separator mismatch.\n";
+}
