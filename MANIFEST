@@ -1,8 +1,0 @@
-CHANGES
-MANIFEST
-META.yml
-Makefile.PL
-README
-bin/convert.pl
-lib/Convert/ASCII/String.pm
-t/Convert-ASCII-String.t
