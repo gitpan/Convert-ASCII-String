@@ -23,4 +23,3 @@ is($perl, '112.101.114.108', 'string2ascii (\$data, $separator)');
 
 ascii2string(\$perl, '.');
 is($perl, 'perl', 'ascii2string (\$data, $separator)');
-

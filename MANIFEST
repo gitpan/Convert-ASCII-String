@@ -1,8 +1,8 @@
-CHANGES
-MANIFEST
-META.yml
-Makefile.PL
-README
 bin/convert.pl
+CHANGES
 lib/Convert/ASCII/String.pm
+Makefile.PL
+MANIFEST			This list of files
+META.yml
+README
 t/Convert-ASCII-String.t

@@ -1,9 +1,9 @@
 #
-# $Id: String.pm,v 0.24 2004/01/06 17:27:52 sts Exp $
+# $Id: String.pm,v 0.25 2004/01/06 17:27:52 sts Exp $
 
 package Convert::ASCII::String;
 
-our $VERSION = '0.24';
+our $VERSION = '0.25';
 
 use strict 'vars';
 use warnings;
@@ -107,7 +107,7 @@ No scalar reference provided.
 
 sub string2ascii {
     my ($data_ref, $sep) = @_;
-    $sep ||= ${__PACKAGE__.'::sep'} || '';
+    $sep ||= ${__PACKAGE__.'::Sep'} || '';
     return ARGS_MISMATCH unless ref $data_ref eq 'SCALAR';
 
     my @ascii = unpack 'C*', $$data_ref;
@@ -144,7 +144,7 @@ Separator mismatch.
 
 sub ascii2string {
     my ($data_ref, $sep) = @_;
-    $sep ||= ${__PACKAGE__.'::sep'};
+    $sep ||= ${__PACKAGE__.'::Sep'};
     return ARGS_MISMATCH unless ref $data_ref eq 'SCALAR' && $sep;
     $sep = quotemeta $sep;
     return SEP_MISMATCH if $$data_ref !~ /$sep/i;
@@ -162,7 +162,7 @@ __END__
 
 The separator may alternatively be set by
 
- $Convert::ASCII::String::sep = '.';
+ $Convert::ASCII::String::Sep = '.';
 
 Function delivery becomes then superfluous.
 

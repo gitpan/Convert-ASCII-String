@@ -5,9 +5,11 @@ use warnings;
 
 use Convert::ASCII::String q/:all/;
 
-my ($return, $transform);
+my ($transform, $return);
 
-#$Convert::ASCII::String::sep = '.';
+no warnings;
+#$Convert::ASCII::String::Sep = '.';
+use warnings;
 
 $transform = 'Premature optimization is the root of all evil.';
 
