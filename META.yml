@@ -6,5 +6,4 @@ requires:
     Exporter: 0 
 distribution_type: module
 license: perl
-dist_abstract: convert character strings to ASCII.
-dist_author: Steven Schubiger
+dist_abstract: Convert character strings to ASCII

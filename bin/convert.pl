@@ -1,8 +1,7 @@
-#!/usr/bin/perl
+#!/usr/local/bin/perl
 
 use strict;
 use warnings;
-
 use Convert::ASCII::String qw(str2asc asc2str);
 
 #$Convert::ASCII::String::Sep = '.';

@@ -1,11 +1,10 @@
-#!/usr/bin/perl
+#!/usr/local/bin/perl
 
 use strict;
 use warnings;
+use Convert::ASCII::String qw(str2asc asc2str);
 
 use Test::More tests => 4;
-
-use Convert::ASCII::String qw(str2asc asc2str);
 
 BEGIN {
     my $PACKAGE = 'Convert::ASCII::String';

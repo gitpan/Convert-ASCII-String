@@ -1,7 +1,7 @@
 Convert::ASCII::String
 ======================
 
-Convert character strings to ASCII.
+Convert character strings to ASCII
 
 INSTALLATION
 
@@ -16,8 +16,7 @@ SCRIPTS
 
 bin/convert.pl
 
-Interface to Convert::ASCII::String 
-that converts strings.
+Converts strings.
 
 LICENSE
 

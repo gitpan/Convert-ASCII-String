@@ -1,26 +1,16 @@
-# $Id: String.pm,v 0.31 2004/01/23 22:25:31 sts Exp $
-
 package Convert::ASCII::String;
 
-use 5.006;
-use base qw(Exporter);
+$VERSION = '0.32';
+@EXPORT_OK = qw(str2asc asc2str);
+
 use strict 'vars';
-use warnings;
-
-our $VERSION = '0.31';
-
-our @EXPORT_OK = qw(str2asc asc2str);
-
-our $Sep;
-
-sub croak {
-    require Carp;
-    &Carp::croak;
-}
+use vars qw($Sep);
+use base qw(Exporter);
+use Carp 'croak';
 
 =head1 NAME
 
-Convert::ASCII::String - convert character strings to ASCII.
+Convert::ASCII::String - Convert character strings to ASCII
 
 =head1 SYNOPSIS
 
@@ -41,15 +31,15 @@ Convert::ASCII::String - convert character strings to ASCII.
 
 =head1 DESCRIPTION
 
-C<Convert::ASCII::String> basically converts strings to ASCII.
+Convert::ASCII::String basically converts strings to ASCII.
 It applies the internal functions C<pack> & C<unpack>. Most time these functions prove 
 to be sufficient if data has to be converted and remains within memory.
 
-C<Pack> & C<unpack> rely upon arrays to convert data and not without reason though.
+C<pack> & C<unpack> rely upon arrays to convert data and not without reason though.
 Preserving multiple ASCII codes in a single string conveys some difficulty since
 its hard to distinguish where from and where to each ASCII code ranges.
 
-C<Convert::ASCII::String> solves this problem by allowing inserting a item separator
+This module solves this problem by allowing inserting a item separator
 between each ASCII code (preferably a non-numeric value).
 
 =head2 Appropriate usage
@@ -58,9 +48,7 @@ In most cases the usage of this module will prove to be inappropriate. If data w
 remain within memory, then array ASCII conversion using C<pack> & C<unpack> is appropriate and
 presumably faster than using C<Convert::ASCII::String>.
 
-C<Convert::ASCII::String> relies upon C<join> & C<split> to merge array to strings and vice versa. 
-Thus wise usage is recommended since such operations may slow down converting if much data
-has be transformed. So, when to use then?
+So, when to use then?
 
 Whenever data has to be converted to ASCII and has to be stored on a disk or other mediums
 where it will freed from the array it was previously kept in. C<pack> & C<unpack> will not be
@@ -86,10 +74,9 @@ Beware, second option will not allow back converting from ASCII.
 =cut
 
 sub str2asc {
-    my $str = shift;
-    my $sep = shift || $Sep || '';
-    croak q~Usage: str2asc($str)~ unless $str;
-
+    my($str, $sep) = @_;
+    $sep ||= $Sep || '';
+    croak 'usage: str2asc($str)' unless $str;    
     return join $sep, unpack 'C*', $str;
 }
 
@@ -102,12 +89,10 @@ And vice versa.
 =cut
 
 sub asc2str {
-    my $asc = shift;
-    my $sep = shift || $Sep; 
-    croak q~Usage: asc2str($asc, $sep)~ unless $asc && $sep;
-    
-    croak q~Separator mismatch~ unless $asc =~ /\Q$sep/i;
-    
+    my($asc, $sep) = @_;
+    $sep ||= $Sep; 
+    croak 'usage: asc2str($asc, $sep)' unless $asc && $sep;    
+    croak 'Separator mismatch' unless $asc =~ /\Q$sep/i;           
     return pack 'C*', split /\Q$sep/, $asc;
 }
 
