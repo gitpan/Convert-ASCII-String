@@ -1,6 +1,6 @@
 package Convert::ASCII::String;
 
-$VERSION = '0.34';
+$VERSION = '0.36';
 @EXPORT_OK = qw(str2asc asc2str);
 
 use strict;
