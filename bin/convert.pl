@@ -1,4 +1,4 @@
-#!/usr/local/bin/perl
+#! /usr/local/bin/perl
 
 use strict;
 use warnings;
@@ -8,8 +8,8 @@ use Convert::ASCII::String qw(str2asc asc2str);
 
 my $transform = 'Qui vult dare parva non debet magna rogare.';
 
-$transform = str2asc($transform, '.');
+$transform = str2asc( $transform, '.' );
 print "$transform\n";
 
-$transform = asc2str($transform, '.');
+$transform = asc2str( $transform, '.' );
 print "\n$transform\n";

@@ -1,4 +1,4 @@
-#!/usr/local/bin/perl
+#! /usr/local/bin/perl
 
 use strict;
 use warnings;
@@ -8,9 +8,9 @@ use Test::More tests => 4;
 
 BEGIN {
     my $PACKAGE = 'Convert::ASCII::String';
-    use_ok($PACKAGE);
-    require_ok($PACKAGE);
+    use_ok( $PACKAGE );
+    require_ok( $PACKAGE );
 }
 
-is(str2asc('perl', '.'), '112.101.114.108', 'str2asc($string, [$sep]);');
-is(asc2str('112.101.114.108', '.'), 'perl', 'asc2str($string, $sep);');
+is( str2asc( 'perl', '.' ), '112.101.114.108', 'str2asc( $string, [$sep] );' );
+is( asc2str( '112.101.114.108', '.' ), 'perl', 'asc2str( $string, $sep );' );
