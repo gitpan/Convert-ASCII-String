@@ -1,0 +1,11 @@
+--- #YAML:1.0
+module_name: Convert-ASCII-String
+dist_version_from: lib/Convert/ASCII/String.pm
+installdirs: site
+requires:
+    Carp:                          0
+    Exporter:                      0
+distribution_type: module
+license: artistic
+dist_abstract: Convert character strings to ASCII and vice versa.
+dist_author: Steven Schubiger
