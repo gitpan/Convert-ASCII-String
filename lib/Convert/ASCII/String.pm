@@ -1,12 +1,12 @@
-#
-# $Id: String.pm,v 0.25 2004/01/06 17:27:52 sts Exp $
+# $Id: String.pm,v 0.26 2004/01/06 17:27:52 sts Exp $
 
 package Convert::ASCII::String;
 
-our $VERSION = '0.25';
-
+use 5.006;
 use strict 'vars';
 use warnings;
+
+our $VERSION = '0.26';
 
 use Exporter;
 use base qw(Exporter);
@@ -180,7 +180,8 @@ perl(1)
 
 =head1 LICENSE
 
-This program is free software; you may redistribute it and/or modify it under the same terms as Perl itself.
+This program is free software; 
+you may redistribute it and/or modify it under the same terms as Perl itself.
 
 =head1 AUTHOR
 

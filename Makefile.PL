@@ -4,10 +4,10 @@ use ExtUtils::MakeMaker;
 WriteMakefile(
     DISTNAME     => 'Convert-ASCII-String',
     NAME         => 'Convert::ASCII::String',
-    VERSION_FROM => 'lib/Convert/ASCII/String.pm', # finds $VERSION
+    VERSION_FROM => 'lib/Convert/ASCII/String.pm',
     PREREQ_PM    => { Exporter => 0 },
     'dist'       => { COMPRESS => 'gzip', SUFFIX => 'gz' },
-    ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
-       (ABSTRACT   => 'convert character strings to ASCII and vice versa.',
-        AUTHOR     => 'Steven Schubiger') : ()),
+    ($] >= 5.005 ? 
+       (ABSTRACT_FROM => 'lib/Convert/ASCII/String.pm',
+        AUTHOR        => 'Steven Schubiger') : ()),
 );
