@@ -1,0 +1,25 @@
+Revision history for Perl extension Convert::ASCII::String.
+
+0.21 2004/01/06
+ - documentation enhanced.
+
+0.07 2004/01/04
+ - return codes occupy their own subs.
+
+0.05 2004/01/02
+ - slight documentation changes.
+
+0.04 2004/01/02
+ - string2ascii() and ascii2string()
+   return codes upon success or failure.
+ - added according tests.
+
+0.03 2004/01/02
+ - the separator may optionally be specified
+   as global var.
+
+0.02 2004/01/01
+ - documentation corrections.
+
+0.01 2004/01/01
+ - initial version.
