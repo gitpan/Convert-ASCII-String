@@ -7,16 +7,16 @@ use warnings;
 
 our $wisdom = 'Premature optimization is the root of all evil.';
 
-my $ret = string2ascii(\$wisdom, '.');
+my $return = string2ascii(\$wisdom, '.');
 print <<"EOT";
-return: $ret
+return: $return
 $wisdom
 EOT
 
 <STDIN>;
 
-$ret = ascii2string(\$wisdom, '.');
+$return = ascii2string(\$wisdom, '.');
 print <<"EOT";
-return: $ret
+return: $return
 $wisdom
 EOT
