@@ -1,5 +1,9 @@
 Revision history for Perl extension Convert::ASCII::String.
 
+0.03 2004/01/02
+ - the separator may optionally be specified
+   as global var.
+
 0.02 2004/01/01
  - testfile tests pack & unpack.
  - documentation corrections.

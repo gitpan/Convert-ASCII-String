@@ -1,6 +1,11 @@
 use Convert::ASCII::String q/:all/;
 
-$wisdom = 'Premature optimization is the root of all evil.';
+use strict;
+use warnings;
+
+#$Convert::ASCII::String::Sep = '.';  
+
+our $wisdom = 'Premature optimization is the root of all evil.';
 
 string2ascii (\$wisdom, '.');
 print "$wisdom\n";
