@@ -1,7 +1,7 @@
 Convert::ASCII::String
 ======================
 
-Extension that converts character strings to ASCII and vice versa.
+Convert character strings to ASCII and vice versa.
 
 INSTALLATION
 

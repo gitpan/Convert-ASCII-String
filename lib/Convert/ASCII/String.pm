@@ -1,13 +1,13 @@
-# $Id: String.pm,v 0.28 2004/01/06 17:27:52 sts Exp $
+# $Id: String.pm,v 0.29 2004/01/06 17:27:52 sts Exp $
 
 package Convert::ASCII::String;
 
 use 5.006;
-use base qw(Exporter);
+use base(Exporter);
 use strict 'vars';
 use warnings;
 
-our $VERSION = '0.28';
+our $VERSION = '0.29';
 
 our @EXPORT_OK = qw(string2ascii ascii2string);
 our %EXPORT_TAGS = (  all  =>    [ @EXPORT_OK ]
@@ -42,10 +42,10 @@ Convert::ASCII::String - convert character strings to ASCII and vice versa.
 =head1 DESCRIPTION
 
 C<Convert::ASCII::String> basically converts strings to ASCII and vice versa.
-It uses perl's built-in functions I<pack> & I<unpack>. Most time these functions
+It uses perl's built-in functions C<pack> & C<unpack>. Most time these functions
 prove to be sufficient if data has to be converted and remains within memory.
 
-I<Pack> & I<unpack> rely upon arrays to convert data and not without reason though.
+C<Pack> & C<unpack> rely upon arrays to convert data and not without reason though.
 Preserving multiple ASCII codes in a single string conveys some difficulty since
 its hard to distinguish where from and where to each ASCII code ranges.
 
@@ -55,15 +55,15 @@ between each ASCII code (preferably a non-numeric value).
 =head2 Appropriate usage
 
 In most cases the usage of this module will prove to be inappropriate. If data will
-remain within memory, then array ASCII conversion using I<pack> & I<unpack> is appropriate and
+remain within memory, then array ASCII conversion using C<pack> & C<unpack> is appropriate and
 presumably faster than using C<Convert::ASCII::String>.
 
-C<Convert::ASCII::String> uses I<join> & I<split> among I<pack> & I<unpack> to merge array to
-strings and vice versa. Thus wise usage is recommended since such operations may slow down
-converting if much data has be transformed. So, when to use then?
+C<Convert::ASCII::String> uses C<join> & C<split> to merge array to strings and vice versa. 
+Thus wise usage is recommended since such operations may slow down converting if much data
+has be transformed. So, when to use then?
 
 Whenever data has to be converted to ASCII and has to be stored on a disk or other mediums
-where it will freed from the array it was previously kept in. I<pack> & I<unpack> will not be
+where it will freed from the array it was previously kept in. C<pack> & C<unpack> will not be
 able to convert an array to character if not each single ASCII code takes up its own index within
 the array. Thus string transformation with an item separator.
 
