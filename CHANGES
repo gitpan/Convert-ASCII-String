@@ -1,8 +1,11 @@
 Revision history for Perl extension Convert::ASCII::String.
 
+0.05 2003/01/02
+ - slight documentation changes.
+
 0.04 2004/01/02
  - string2ascii() and ascii2string()
-   return 0 or error code (1,2);
+   return codes upon success or failure.
  - added according tests.
 
 0.03 2004/01/02

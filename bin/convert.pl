@@ -3,7 +3,7 @@ use Convert::ASCII::String q/:all/;
 use strict;
 use warnings;
 
-#$Convert::ASCII::String::Sep = '.';
+#$Convert::ASCII::String::sep = '.';
 
 our $wisdom = 'Premature optimization is the root of all evil.';
 
