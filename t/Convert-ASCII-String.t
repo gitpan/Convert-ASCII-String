@@ -15,11 +15,11 @@ BEGIN {
 
 my $perl = 'perl';
 string2ascii(\$perl);
-is($perl, '112101114108', 'string2ascii (\$data)');
+is($perl, '112101114108', 'string2ascii (\$data);');
 
 $perl = 'perl';
 string2ascii(\$perl, '.');
-is($perl, '112.101.114.108', 'string2ascii (\$data, $separator)');
+is($perl, '112.101.114.108', 'string2ascii (\$data, $separator);');
 
 ascii2string(\$perl, '.');
-is($perl, 'perl', 'ascii2string (\$data, $separator)');
+is($perl, 'perl', 'ascii2string (\$data, $separator);');

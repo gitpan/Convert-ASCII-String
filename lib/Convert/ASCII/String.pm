@@ -1,4 +1,4 @@
-# $Id: String.pm,v 0.26 2004/01/06 17:27:52 sts Exp $
+# $Id: String.pm,v 0.27 2004/01/06 17:27:52 sts Exp $
 
 package Convert::ASCII::String;
 
@@ -6,7 +6,7 @@ use 5.006;
 use strict 'vars';
 use warnings;
 
-our $VERSION = '0.26';
+our $VERSION = '0.27';
 
 use Exporter;
 use base qw(Exporter);
