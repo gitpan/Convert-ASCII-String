@@ -9,7 +9,6 @@ our $wisdom = 'Premature optimization is the root of all evil.';
 
 #$Convert::ASCII::String::sep = '.';
 
-# string to ascii
 $return = string2ascii(\$wisdom, '.');
 
 if ($return == 1) {
@@ -21,7 +20,6 @@ elsif ($return == -1) {
 
 <STDIN>;
 
-# vice versa
 $return = ascii2string(\$wisdom, '.');
 
 if ($return == 1) {
