@@ -1,22 +1,16 @@
-# $Id: String.pm,v 0.27 2004/01/06 17:27:52 sts Exp $
+# $Id: String.pm,v 0.28 2004/01/06 17:27:52 sts Exp $
 
 package Convert::ASCII::String;
 
 use 5.006;
+use base qw(Exporter);
 use strict 'vars';
 use warnings;
 
-our $VERSION = '0.27';
+our $VERSION = '0.28';
 
-use Exporter;
-use base qw(Exporter);
-
-our (@EXPORT_OK, %EXPORT_TAGS, @subs);
-
-@subs = qw(string2ascii ascii2string);
-
-@EXPORT_OK = @subs;
-%EXPORT_TAGS = (  all  =>    [ @subs ]
+our @EXPORT_OK = qw(string2ascii ascii2string);
+our %EXPORT_TAGS = (  all  =>    [ @EXPORT_OK ]
 );
 
 sub SUCCESS { 1 }
@@ -106,12 +100,12 @@ No scalar reference provided.
 =cut
 
 sub string2ascii {
-    my ($data_ref, $sep) = @_;
+    my ($data, $sep) = @_;
     $sep ||= ${__PACKAGE__.'::Sep'} || '';
-    return ARGS_MISMATCH unless ref $data_ref eq 'SCALAR';
+    return ARGS_MISMATCH unless ref $data eq 'SCALAR';
 
-    my @ascii = unpack 'C*', $$data_ref;
-    $$data_ref = join $sep, @ascii;
+    my @ascii = unpack 'C*', $$data;
+    $$data = join $sep, @ascii;
 
     return SUCCESS;
 }
@@ -143,14 +137,14 @@ Separator mismatch.
 =cut
 
 sub ascii2string {
-    my ($data_ref, $sep) = @_;
+    my ($data, $sep) = @_;
     $sep ||= ${__PACKAGE__.'::Sep'};
-    return ARGS_MISMATCH unless ref $data_ref eq 'SCALAR' && $sep;
+    return ARGS_MISMATCH unless ref $data eq 'SCALAR' && $sep;
     $sep = quotemeta $sep;
-    return SEP_MISMATCH if $$data_ref !~ /$sep/i;
+    return SEP_MISMATCH if $$data !~ /$sep/i;
 
-    my @ascii = split $sep, $$data_ref;
-    $$data_ref = pack 'C*', @ascii;
+    my @ascii = split $sep, $$data;
+    $$data = pack 'C*', @ascii;
 
     return SUCCESS;
 }
@@ -166,7 +160,7 @@ The separator may alternatively be set by
 
 Function delivery becomes then superfluous.
 
-=head2 EXPORT
+=head1 EXPORT
 
 C<string2ascii(), ascii2string()> upon request.
 
